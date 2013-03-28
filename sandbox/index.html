@@ -1,0 +1,40 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <script src="rbruntime/runtime.js" type="text/javascript"></script>
+  <script src="rbruntime/kernel.js" type="text/javascript"></script>
+  <script src="rbruntime/string.js" type="text/javascript"></script>
+  <script src="rbruntime/array.js" type="text/javascript"></script>
+  <script src="rbruntime/immediate.js" type="text/javascript"></script>
+  
+  <title>rb2js demo</title>
+  <style>
+    #STDOUT {
+      padding: 5px;
+      font-size: 14pt;
+      background-color: #000;
+      color: #0f0;
+      overflow: scroll;
+      height: 20em;
+    }
+  </style>
+</head>
+<body>
+  
+  <h1>rb2js demo</h1>
+  
+  <pre id='STDOUT'></pre>
+  
+  <script type="text/javascript">
+  var s = RbString.box('Hello');
+  rbSendMessage(s, '<<', [' World']);
+  rbSendMessage(RbRootObject.getConstant('Kernel'), 'puts', [s,rbSendMessage(s,'reverse')]);
+	var a = RbArray.box([1,2,3]);
+	rbSendMessage(RbRootObject.getConstant('Kernel'), 'puts', [rbSendMessage(a,'join')]);
+	rbSendMessage(RbRootObject.getConstant('Kernel'), 'puts', [rbSendMessage(rbSendMessage(a,'zip',[3,2,1]),'join')]);
+	rbSendMessage(RbRootObject.getConstant('Kernel'), 'puts', [rbSendMessage(rbSendMessage(a,'first',[2]),'join')]);
+  </script>
+    
+</body>
+</html>
